@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <preference for="Rasik\EmployeeManagement\Api\EmployeeRepositoryInterface" type="Rasik\EmployeeManagement\Model\EmployeeRepository"/>
+    <preference for="Rasik\EmployeeManagement\Api\Data\EmployeeInterface" type="Rasik\EmployeeManagement\Model\Employee"/>
+    <preference for="Magento\Framework\Api\SearchResultsInterface" type="Rasik\EmployeeManagement\Model\EmployeeSearchResults"/>
+    
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="rasik_employee_listing_data_source" xsi:type="string">Rasik\EmployeeManagement\Model\ResourceModel\Employee\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Rasik\EmployeeManagement\Model\ResourceModel\Employee\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">rasik_employee</argument>
+            <argument name="eventPrefix" xsi:type="string">rasik_employee_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">employee_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Rasik\EmployeeManagement\Model\ResourceModel\Employee</argument>
+        </arguments>
+    </type>
+</config>

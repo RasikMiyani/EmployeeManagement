@@ -1,0 +1,46 @@
+type Employee {
+    entity_id: Int
+    name: String
+    address: String
+    salary: Float
+    dob: String
+    contact_number: String
+}
+
+type EmployeeResponse {
+    success: Boolean
+    message: String
+    employee: Employee
+}
+
+type EmployeeListResponse {
+    total_count: Int
+    items: [Employee]
+}
+
+type Query {
+    employeeById(entity_id: Int!): Employee
+        @resolver(class: "Rasik\\EmployeeManagement\\Model\\Resolver\\EmployeeById")
+
+    employeeList: EmployeeListResponse
+        @resolver(class: "Rasik\\EmployeeManagement\\Model\\Resolver\\EmployeeList")
+}
+
+input EmployeeInput {
+    name: String!
+    address: String
+    salary: Float
+    dob: String
+    contact_number: String
+}
+
+type Mutation {
+    createEmployee(input: EmployeeInput!): EmployeeResponse
+        @resolver(class: "Rasik\\EmployeeManagement\\Model\\Resolver\\CreateEmployee")
+
+    updateEmployee(entity_id: Int!, input: EmployeeInput!): EmployeeResponse
+        @resolver(class: "Rasik\\EmployeeManagement\\Model\\Resolver\\UpdateEmployee")
+
+    deleteEmployee(entity_id: Int!): EmployeeResponse
+        @resolver(class: "Rasik\\EmployeeManagement\\Model\\Resolver\\DeleteEmployee")
+}

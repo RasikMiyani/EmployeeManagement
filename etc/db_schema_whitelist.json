@@ -1,0 +1,21 @@
+{
+    "rasik_employee": {
+        "column": {
+            "employee_id": true,
+            "name": true,
+            "address": true,
+            "salary": true,
+            "dob": true,
+            "contact_number": true,
+            "entity_id": true
+        },
+        "index": {
+            "RASIK_EMPLOYEE_EMPLOYEE_ID": true,
+            "RASIK_EMPLOYEE_NAME_CONTACT_NUMBER_ADDRESS": true,
+            "RASIK_EMPLOYEE_ENTITY_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Rasik_EmployeeManagement::employee"
+             title="Employee Management"
+             translate="title"
+             module="Rasik_EmployeeManagement"
+             sortOrder="15"
+             dependsOnModule="Magento_Sales"
+             parent="Magento_Backend::content"
+             resource="Rasik_EmployeeManagement::employee"/>
+        <add id="Rasik_EmployeeManagement::employee_list"
+             title="Employee List"
+             translate="title"
+             module="Rasik_EmployeeManagement"
+             sortOrder="10"
+             parent="Rasik_EmployeeManagement::employee"
+             action="employee/employee/index"
+             resource="Rasik_EmployeeManagement::employee"/>
+    </menu>
+</config>
