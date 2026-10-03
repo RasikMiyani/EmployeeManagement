@@ -1,4 +1,10 @@
 <?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+declare(strict_types=1);
+
 namespace Rasik\EmployeeManagement\Model;
 
 use Magento\Framework\Model\AbstractModel;
@@ -7,19 +13,19 @@ use Rasik\EmployeeManagement\Model\ResourceModel\Employee as EmployeeResource;
 
 /**
  * Employee model implementation
- * Implements EmployeeInterface
- * @inheritdoc
  */
 class Employee extends AbstractModel implements EmployeeInterface
 {
-     /**
+    /**
      * CMS page cache tag.
      */
-    const CACHE_TAG = 'rasik_employee';
+    public const CACHE_TAG = 'rasik_employee';
+
     /**
      * @var string
      */
     protected $_cacheTag = 'rasik_employee';
+
     /**
      * Prefix of model events names.
      *
@@ -28,7 +34,9 @@ class Employee extends AbstractModel implements EmployeeInterface
     protected $_eventPrefix = 'rasik_employee';
 
     /**
-     * @inheritdoc
+     * Initialize resource model
+     *
+     * @return void
      */
     protected function _construct()
     {
@@ -40,7 +48,8 @@ class Employee extends AbstractModel implements EmployeeInterface
      */
     public function getEntityId()
     {
-        return $this->getData(self::EMPLOYEE_ID);
+        $id = $this->getData(self::EMPLOYEE_ID);
+        return $id !== null ? (int)$id : null;
     }
 
     /**
@@ -88,7 +97,8 @@ class Employee extends AbstractModel implements EmployeeInterface
      */
     public function getSalary()
     {
-        return $this->getData(self::SALARY);
+        $salary = $this->getData(self::SALARY);
+        return $salary !== null ? (float)$salary : null;
     }
 
     /**

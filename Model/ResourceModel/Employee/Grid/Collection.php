@@ -1,4 +1,8 @@
 <?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
 declare(strict_types=1);
 
 namespace Rasik\EmployeeManagement\Model\ResourceModel\Employee\Grid;
@@ -13,10 +17,29 @@ use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Psr\Log\LoggerInterface;
 use Rasik\EmployeeManagement\Model\ResourceModel\Employee\Collection as EmployeeCollection;
 
+/**
+ * Grid Collection for UI Component Listing
+ */
 class Collection extends EmployeeCollection implements SearchResultInterface
 {
-    private AggregationInterface $aggregations;
+    /**
+     * @var AggregationInterface|null
+     */
+    protected $aggregations;
 
+    /**
+     * @param EntityFactoryInterface $entityFactory
+     * @param LoggerInterface $logger
+     * @param FetchStrategyInterface $fetchStrategy
+     * @param ManagerInterface $eventManager
+     * @param string $mainTable
+     * @param string $eventPrefix
+     * @param string $eventObject
+     * @param string $resourceModel
+     * @param string $model
+     * @param \Magento\Framework\DB\Adapter\AdapterInterface|null $connection
+     * @param AbstractDb|null $resource
+     */
     public function __construct(
         EntityFactoryInterface $entityFactory,
         LoggerInterface $logger,
@@ -44,55 +67,89 @@ class Collection extends EmployeeCollection implements SearchResultInterface
         $this->setMainTable($mainTable);
     }
 
-    public function getAggregations(): AggregationInterface
+    /**
+     * Get Aggregations
+     *
+     * @return AggregationInterface|null
+     */
+    public function getAggregations()
     {
         return $this->aggregations;
     }
 
-    public function setAggregations($aggregations): void
+    /**
+     * Set Aggregations
+     *
+     * @param AggregationInterface $aggregations
+     * @return $this
+     */
+    public function setAggregations($aggregations)
     {
         $this->aggregations = $aggregations;
+        return $this;
     }
 
     /**
      * Retrieve all ids for collection
-     * Backward compatibility with EAV collection
+     *
+     * @param int|null $limit
+     * @param int|null $offset
+     * @return array
      */
-    public function getAllIds(?int $limit = null, ?int $offset = null): array
+    public function getAllIds($limit = null, $offset = null)
     {
         return $this->getConnection()->fetchCol($this->_getAllIdsSelect($limit, $offset), $this->_bindParams);
     }
 
-    public function getSearchCriteria(): ?SearchCriteriaInterface
+    /**
+     * Get Search Criteria
+     *
+     * @return SearchCriteriaInterface|null
+     */
+    public function getSearchCriteria()
     {
         return null;
     }
 
     /**
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * Set Search Criteria
+     *
+     * @param SearchCriteriaInterface|null $searchCriteria
+     * @return $this
      */
-    public function setSearchCriteria(SearchCriteriaInterface $searchCriteria = null): Collection
+    public function setSearchCriteria(SearchCriteriaInterface $searchCriteria = null)
     {
         return $this;
     }
 
-    public function getTotalCount(): int
+    /**
+     * Get Total Count
+     *
+     * @return int
+     */
+    public function getTotalCount()
     {
         return $this->getSize();
     }
 
     /**
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * Set Total Count
+     *
+     * @param int $totalCount
+     * @return $this
      */
-    public function setTotalCount($totalCount): Collection
+    public function setTotalCount($totalCount)
     {
         return $this;
     }
 
     /**
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * Set Items
+     *
+     * @param array|null $items
+     * @return $this
      */
-    public function setItems(array $items = null): Collection
+    public function setItems(array $items = null)
     {
         return $this;
     }

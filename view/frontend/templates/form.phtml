@@ -1,0 +1,166 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+declare(strict_types=1);
+
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+
+<div class="block employee-registration-block">
+    <div class="block-title">
+        <strong><?= $escaper->escapeHtml(__('Employee Registration Form')) ?></strong>
+    </div>
+
+    <div class="block-content">
+        <form
+            class="form employee-form"
+            action="<?= $escaper->escapeUrl($block->getUrl('employee/index/save')) ?>"
+            method="post"
+            id="employee-form"
+            data-mage-init='{"validation":{}}'
+            data-hasrequired="<?= $escaper->escapeHtmlAttr(__('* Required Fields')) ?>"
+            autocomplete="off"
+            novalidate="novalidate"
+        >
+            <?= $block->getBlockHtml('formkey') ?>
+
+            <fieldset class="fieldset">
+                <legend class="legend">
+                    <span><?= $escaper->escapeHtml(__('Personal Information')) ?></span>
+                </legend>
+
+                <!-- Full Name -->
+                <div class="field name required">
+                    <label class="label" for="name">
+                        <span><?= $escaper->escapeHtml(__('Full Name')) ?></span>
+                    </label>
+                    <div class="control">
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            title="<?= $escaper->escapeHtmlAttr(__('Full Name')) ?>"
+                            class="input-text"
+                            minlength="3"
+                            maxlength="100"
+                            data-validate="{
+                                required:true,
+                                'validate-no-html-tags':true,
+                                'min_text_length':3,
+                                'max_text_length':100
+                            }"
+                        />
+                    </div>
+                </div>
+
+                <!-- Contact Number -->
+                <div class="field contact_number required">
+                    <label class="label" for="contact_number">
+                        <span><?= $escaper->escapeHtml(__('Contact Number')) ?></span>
+                    </label>
+                    <div class="control">
+                        <input
+                            type="tel"
+                            name="contact_number"
+                            id="contact_number"
+                            title="<?= $escaper->escapeHtmlAttr(__('Contact Number')) ?>"
+                            class="input-text"
+                            minlength="10"
+                            maxlength="15"
+                            data-validate="{
+                                required:true,
+                                'validate-digits':true,
+                                'min_text_length':10,
+                                'max_text_length':15
+                            }"
+                        />
+                    </div>
+                </div>
+
+                <!-- Date of Birth -->
+                <div class="field dob required">
+                    <label class="label" for="dob">
+                        <span><?= $escaper->escapeHtml(__('Date of Birth')) ?></span>
+                    </label>
+                    <div class="control">
+                        <input
+                            type="date"
+                            name="dob"
+                            id="dob"
+                            title="<?= $escaper->escapeHtmlAttr(__('Date of Birth')) ?>"
+                            class="input-text"
+                            max="<?= $escaper->escapeHtmlAttr(date('Y-m-d')) ?>"
+                            data-validate="{
+                                required:true,
+                                'validate-date':true
+                            }"
+                        />
+                    </div>
+                </div>
+
+                <!-- Salary -->
+                <div class="field salary required">
+                    <label class="label" for="salary">
+                        <span><?= $escaper->escapeHtml(__('Salary')) ?></span>
+                    </label>
+                    <div class="control">
+                        <input
+                            type="number"
+                            name="salary"
+                            id="salary"
+                            title="<?= $escaper->escapeHtmlAttr(__('Salary')) ?>"
+                            class="input-text"
+                            min="0"
+                            step="0.01"
+                            data-validate="{
+                                required:true,
+                                'validate-number':true,
+                                'validate-zero-or-greater':true
+                            }"
+                        />
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="field address required">
+                    <label class="label" for="address">
+                        <span><?= $escaper->escapeHtml(__('Address')) ?></span>
+                    </label>
+                    <div class="control">
+                        <textarea
+                            name="address"
+                            id="address"
+                            title="<?= $escaper->escapeHtmlAttr(__('Address')) ?>"
+                            class="input-text"
+                            cols="5"
+                            rows="3"
+                            minlength="10"
+                            maxlength="500"
+                            data-validate="{
+                                required:true,
+                                'min_text_length':10,
+                                'max_text_length':500
+                            }"
+                        ></textarea>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <button
+                        type="submit"
+                        title="<?= $escaper->escapeHtmlAttr(__('Submit Employee')) ?>"
+                        class="action submit primary"
+                        id="submit-employee-btn"
+                    >
+                        <span><?= $escaper->escapeHtml(__('Submit Employee')) ?></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

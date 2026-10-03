@@ -1,5 +1,16 @@
 <?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+declare(strict_types=1);
+
 namespace Rasik\EmployeeManagement\Api;
+
+use Magento\Framework\Api\SearchCriteriaInterface;
+use Rasik\EmployeeManagement\Api\Data\EmployeeInterface;
+use Rasik\EmployeeManagement\Api\Data\EmployeeSearchResultsInterface;
+
 /**
  * Interface for Employee Repository
  * @api
@@ -7,34 +18,48 @@ namespace Rasik\EmployeeManagement\Api;
 interface EmployeeRepositoryInterface
 {
     /**
-     * Create or update an employee
-     * @api
-     * @param \Rasik\EmployeeManagement\Api\Data\EmployeeInterface $employee Employee data object
-     * @return \Rasik\EmployeeManagement\Api\Data\EmployeeInterface Created/Updated employee object
+     * Save employee
+     *
+     * @param EmployeeInterface $employee
+     * @return EmployeeInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function save(\Rasik\EmployeeManagement\Api\Data\EmployeeInterface $employee): \Rasik\EmployeeManagement\Api\Data\EmployeeInterface;
+    public function save(EmployeeInterface $employee): EmployeeInterface;
 
     /**
      * Get employee by ID
-     * @api
-     * @param int $employeeId Employee ID
-     * @return \Rasik\EmployeeManagement\Api\Data\EmployeeInterface Employee data object
+     *
+     * @param int $employeeId
+     * @return EmployeeInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getById(int $employeeId): \Rasik\EmployeeManagement\Api\Data\EmployeeInterface;
+    public function getById(int $employeeId): EmployeeInterface;
+
+    /**
+     * Delete employee
+     *
+     * @param EmployeeInterface $employee
+     * @return bool
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function delete(EmployeeInterface $employee): bool;
 
     /**
      * Delete employee by ID
-     * @api
-     * @param int $employeeId Employee ID
-     * @return bool True on success
+     *
+     * @param int $employeeId
+     * @return bool
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function deleteById(int $employeeId): bool;
 
     /**
-     * Get list of employees
-     * @api
-     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
-     * @return \Magento\Framework\Api\SearchResultsInterface
+     * Get list of employees matching the search criteria
+     *
+     * @param SearchCriteriaInterface $searchCriteria
+     * @return EmployeeSearchResultsInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria);
+    public function getList(SearchCriteriaInterface $searchCriteria): EmployeeSearchResultsInterface;
 }

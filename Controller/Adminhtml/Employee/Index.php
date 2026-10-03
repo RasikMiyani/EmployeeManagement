@@ -1,17 +1,52 @@
 <?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+declare(strict_types=1);
+
 namespace Rasik\EmployeeManagement\Controller\Adminhtml\Employee;
 
 use Magento\Backend\App\Action;
-use Magento\Framework\Controller\ResultFactory;
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\App\Action\HttpGetActionInterface;
+use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\View\Result\PageFactory;
 
-class Index extends Action
+/**
+ * Adminhtml Employee Listing Action
+ */
+class Index extends Action implements HttpGetActionInterface
 {
-    const ADMIN_RESOURCE = 'Rasik_EmployeeManagement::employee_management';
+    public const ADMIN_RESOURCE = 'Rasik_EmployeeManagement::employee';
 
-    public function execute()
+    /**
+     * @var PageFactory
+     */
+    private PageFactory $resultPageFactory;
+
+    /**
+     * @param Context $context
+     * @param PageFactory $resultPageFactory
+     */
+    public function __construct(
+        Context $context,
+        PageFactory $resultPageFactory
+    ) {
+        parent::__construct($context);
+        $this->resultPageFactory = $resultPageFactory;
+    }
+
+    /**
+     * Index action
+     *
+     * @return ResultInterface
+     */
+    public function execute(): ResultInterface
     {
-        $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
-        $resultPage->getConfig()->getTitle()->prepend(__('Employees'));
+        $resultPage = $this->resultPageFactory->create();
+        $resultPage->setActiveMenu('Rasik_EmployeeManagement::employee_list');
+        $resultPage->getConfig()->getTitle()->prepend(__('Employee Management'));
         return $resultPage;
     }
 }

@@ -1,9 +1,24 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Service Contract Preferences -->
     <preference for="Rasik\EmployeeManagement\Api\EmployeeRepositoryInterface" type="Rasik\EmployeeManagement\Model\EmployeeRepository"/>
     <preference for="Rasik\EmployeeManagement\Api\Data\EmployeeInterface" type="Rasik\EmployeeManagement\Model\Employee"/>
-    <preference for="Magento\Framework\Api\SearchResultsInterface" type="Rasik\EmployeeManagement\Model\EmployeeSearchResults"/>
-    
+    <preference for="Rasik\EmployeeManagement\Api\Data\EmployeeSearchResultsInterface" type="Rasik\EmployeeManagement\Model\EmployeeSearchResults"/>
+
+    <!-- Inject CollectionProcessor into EmployeeRepository -->
+    <type name="Rasik\EmployeeManagement\Model\EmployeeRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor</argument>
+        </arguments>
+    </type>
+
+    <!-- UI Component Grid Data Provider Registration -->
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
@@ -12,6 +27,7 @@
         </arguments>
     </type>
 
+    <!-- Grid Collection Configuration -->
     <type name="Rasik\EmployeeManagement\Model\ResourceModel\Employee\Grid\Collection">
         <arguments>
             <argument name="mainTable" xsi:type="string">rasik_employee</argument>

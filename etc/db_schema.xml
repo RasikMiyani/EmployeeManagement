@@ -1,27 +1,27 @@
 <?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-<table name="rasik_employee" resource="default" engine="innodb" comment="Employee Table">
-    <column name="entity_id"
-                xsi:type="int"
-                identity="true"
-                nullable="false"/>
-    <!-- OLD COLUMN (DISABLED) -->
-    <column name="employee_id" xsi:type="int" disabled="true"/>
-    <column name="name" xsi:type="varchar" length="255" nullable="false"/>
-    <column name="address" xsi:type="text"/>
-    <column name="salary" xsi:type="decimal" precision="10" scale="2"/>
-    <column name="dob" xsi:type="date"/>
-    <column name="contact_number" xsi:type="varchar" length="20"/>
-    <constraint xsi:type="primary" referenceId="PRIMARY">
-        <column name="entity_id"/>
-    </constraint>
-    <index referenceId="RASIK_EMPLOYEE_ENTITY_ID" indexType="btree">
-        <column name="entity_id"/>
-    </index>
-    <index referenceId="RASIK_EMPLOYEE_NAME_CONTACT_NUMBER_ADDRESS" indexType="fulltext">
-        <column name="name"/>
-        <column name="contact_number"/>
-        <column name="address"/>
-    </index>
-</table>
+    <table name="rasik_employee" resource="default" engine="innodb" comment="Employee Table">
+        <column name="entity_id" xsi:type="int" identity="true" nullable="false" comment="Entity ID"/>
+        <column name="name" xsi:type="varchar" length="255" nullable="false" comment="Employee Name"/>
+        <column name="contact_number" xsi:type="varchar" length="20" nullable="false" comment="Contact Number"/>
+        <column name="dob" xsi:type="date" nullable="true" comment="Date of Birth"/>
+        <column name="salary" xsi:type="decimal" precision="10" scale="2" nullable="true" comment="Salary"/>
+        <column name="address" xsi:type="text" nullable="true" comment="Address"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+
+        <index referenceId="RASIK_EMPLOYEE_NAME_CONTACT_NUMBER_ADDRESS" indexType="fulltext">
+            <column name="name"/>
+            <column name="contact_number"/>
+            <column name="address"/>
+        </index>
+    </table>
 </schema>

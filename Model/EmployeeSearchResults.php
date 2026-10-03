@@ -1,25 +1,14 @@
 <?php
+declare(strict_types=1);
+
 namespace Rasik\EmployeeManagement\Model;
 
 use Magento\Framework\Api\SearchResults;
-use Rasik\EmployeeManagement\Api\Data\EmployeeInterface;
+use Rasik\EmployeeManagement\Api\Data\EmployeeSearchResultsInterface;
 
-class EmployeeSearchResults extends SearchResults
+/**
+ * Service Contract Employee Search Results Model
+ */
+class EmployeeSearchResults extends SearchResults implements EmployeeSearchResultsInterface
 {
-    /**
-     * @return EmployeeInterface[]
-     */
-    public function getItems()
-    {
-        return parent::getItems();
-    }
-
-    /**
-     * @param EmployeeInterface[] $items
-     * @return $this
-     */
-    public function setItems(array $items = null)
-    {
-        return parent::setItems($items);
-    }
 }
